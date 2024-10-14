@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #00C9FF, #92FE9D);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .weather-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: center;
+            width: 350px;
+        }
+        h1 {
+            color: #4A4A4A;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        input[type="submit"] {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .weather-info {
+            margin-top: 20px;
+        }
+        .weather-info img {
+            width: 100px;
+        }
+        .temp {
+            font-size: 2.5em;
+            color: #333;
+        }
+        .details {
+            margin-top: 10px;
+            color: #555;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="weather-container">
+        <h1>Weather App</h1>
+        <form method="POST">
+            <input type="text" name="city" placeholder="Enter city" required>
+            <input type="submit" value="Get Weather">
+        </form>
+        
+        {% if data.error %}
+            <p class="error">{{ data.error }}</p>
+        {% else %}
+            <div class="weather-info">
+                <img src="{{ data.icon }}" alt="Weather Icon">
+                <div class="temp">{{ data.temp_c }}</div>
+                <div class="details">
+                    <p>{{ data.city }}, {{ data.country }}</p>
+                    <p>Condition: {{ data.condition }}</p>
+                    <p>Humidity: {{ data.humidity }}%</p>
+                    <p>Wind: {{ data.wind_speed }}</p>
+                    <p>Coordinates: {{ data.coordinate }}</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
